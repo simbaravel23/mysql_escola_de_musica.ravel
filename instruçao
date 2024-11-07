@@ -1,0 +1,5 @@
+dependencias :
+-npm init -y
+-npm install express
+-adicionar ( "mysql2": "^3.11.4") no package.json e dar "npm i"
+
