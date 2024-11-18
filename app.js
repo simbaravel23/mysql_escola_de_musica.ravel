@@ -9,8 +9,8 @@ const port = 3000
 const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: '',
-    database: 'aulaMusica'
+    password: 'simba123',
+    database: '?minha_escola'
 })
 
 //middleware para receber os dados em formato json
