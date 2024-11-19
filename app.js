@@ -83,8 +83,8 @@ app.get('/alunos', async (req, res) => {
 
 app.post('/alunos', async (req, res) => {
     try {
-        const {nome, instrumento} = req.body 
-        const [resultado] = await pool.query('INSERT INTO alunos (nome, instrumento) VALUES (?, ?) ', [nome, instrumento])
+        const {idade, endereco} = req.body 
+        const [resultado] = await pool.query('INSERT INTO alunos (idade, endereco) VALUES (?, ?) ', [idade, endereco])
         res.status(201).json({message: 'Aluno registrado, novo aluno familiaaaaa😁😁', id: resultado.insertId})
     } catch (error) {
         console.error('Erro ao registrar o aluno, que guerra em:', error)
@@ -94,8 +94,8 @@ app.post('/alunos', async (req, res) => {
 
 app.put('/alunos/:id', async (req, res) => {
     try {
-        const {nome, instrumento} = req.body
-        const [resultado] = await pool.query('UPDATE alunos SET nome = ?, instrumento = ? WHERE id = ?', [nome, instrumento, req.params.id])
+        const {idade, endereco} = req.body
+        const [resultado] = await pool.query('UPDATE alunos SET idade = ?, endereco = ? WHERE id = ?', [nome, instrumento, req.params.id])
 
         if (resultado.affectedRows === 0) {
            return res.status(404).json({ message: 'Aluno nao encontrado, vai procurar rapaz!!'})
