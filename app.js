@@ -10,7 +10,7 @@ const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: 'simba123',
-    database: 'minha_escola'
+    database: 'minha_escola2'
 })
 
 //middleware para receber os dados em formato json
@@ -30,8 +30,8 @@ app.get('/instrumentos', async (req, res) => {
 
 app.post('/instrumentos', async (req, res) => {
     try {
-        const {nome, naipe, tom} = req.body
-        const [resultado] =await pool.query('INSERT INTO instrumentos (nome, naipe, tom) values (?, ?, ?)', [nome, naipe, tom])
+        const {tipo, modelo, marca} = req.body
+        const [resultado] =await pool.query('INSERT INTO instrumentos (tipo, modelo, marca) values (?, ?, ?)', [tipo, modelo, marca])
         res.status(201).json({ message: 'Instrumento registrado com sucesso anjoo, e nois tmj', id: resultado.insertId})
     } catch  (error) {
         console.error('Erro ao registrar o instrumento anjo, q guerra 🙁', error)
@@ -42,8 +42,8 @@ app.post('/instrumentos', async (req, res) => {
 
 app.put('/instrumentos/:id', async (req, res) => {
     try {
-        const {nome, naipe, tom} = req.body
-        const [resultado] = await pool.query('UPDATE instrumentos SET nome = ?, naipe = ?, tom = ? WHERE id = ?', [nome, naipe, tom, req.params.id])
+        const {tipo, modelo, marca} = req.body
+        const [resultado] = await pool.query('UPDATE instrumentos SET tipo = ?, modelo = ?, marca = ? WHERE id = ?', [tipo, modelo, marca, req.params.id])
         
         if (resultado.affectedRows === 0 ) {
             return res.status(404).json({ message: 'Instrumento nao encontrado, o encarregado brecou'})
