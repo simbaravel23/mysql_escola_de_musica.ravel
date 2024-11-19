@@ -134,8 +134,8 @@ app.get('/frequencia', async (req, res) => {
 
 app.post('/frequencia', async (req, res) => {
     try {
-        const {nome, frequencia_em_porcentagem} = req.body 
-        const [resultado] = await pool.query('INSERT INTO frequencia (nome, frequencia_em_porcentagem) VALUES (?, ?) ', [nome, frequencia_em_porcentagem])
+        const {data, instrumentos,alunos, instrutores } = req.body 
+        const [resultado] = await pool.query('INSERT INTO frequencia (data, instrumentos,alunos, instrutores) VALUES (?, ?, ?, ?) ', [data, instrumentos,alunos, instrutores])
         res.status(201).json({message: 'Frequencia registrada, eai ta bom ou ruim', id: resultado.insertId})
     } catch (error) {
         console.error('Erro ao registrar a frequencia, que guerra em:', error)
@@ -145,8 +145,8 @@ app.post('/frequencia', async (req, res) => {
 
 app.put('/frequencia/:id', async (req, res) => {
     try {
-        const {nome, frequencia_em_porcentagem} = req.body
-        const [resultado] = await pool.query('UPDATE frequencia SET nome = ?, frequencia_em_porcentagem = ? WHERE id = ?', [nome, frequencia_em_porcentagem, req.params.id])
+        const {data, instrumentos,alunos, instrutores} = req.body
+        const [resultado] = await pool.query('UPDATE frequencia SET data = ?, instrumentos  = ?, alunos = ?, instrutores = ?WHERE id = ?', [data, instrumentos,alunos, instrutores, req.params.id])
 
         if (resultado.affectedRows === 0) {
            return res.status(404).json({ message: 'Frequencia nao encontrada, ta ruim em fih'})
