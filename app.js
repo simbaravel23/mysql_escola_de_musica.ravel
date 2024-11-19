@@ -95,7 +95,7 @@ app.post('/alunos', async (req, res) => {
 app.put('/alunos/:id', async (req, res) => {
     try {
         const {idade, endereco} = req.body
-        const [resultado] = await pool.query('UPDATE alunos SET idade = ?, endereco = ? WHERE id = ?', [nome, instrumento, req.params.id])
+        const [resultado] = await pool.query('UPDATE alunos SET idade = ?, endereco = ? WHERE id = ?', [idade, endereco, req.params.id])
 
         if (resultado.affectedRows === 0) {
            return res.status(404).json({ message: 'Aluno nao encontrado, vai procurar rapaz!!'})
