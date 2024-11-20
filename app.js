@@ -185,8 +185,8 @@ app.get('/Instrutores', async (req, res) => {
 
 app.post('/Instrutores', async (req, res) => {
     try {
-        const {nome, codigo, hora_de_entrada, hora_de_saida, total_de_alunos_passados} = req.body 
-        const [resultado] = await pool.query('INSERT INTO Instrutores (nome, codigo, hora_de_entrada, hora_de_saida, total_de_alunos_passados) VALUES (?, ?, ?, ?, ?) ', [nome, codigo, hora_de_entrada, hora_de_saida, total_de_alunos_passados])
+        const {idade, endereco, especialidade } = req.body 
+        const [resultado] = await pool.query('INSERT INTO Instrutores (idade, endereco, especialidade) VALUES (?, ?, ?) ', [idade, endereco, especialidade])
         res.status(201).json({message: 'Instrutor registrado com sucesso, mais um homi pra trabaia', id: resultado.insertId})
     } catch (error) {
         console.error('Erro ao registrar o instrutor , que guerra em:', error)
@@ -196,8 +196,8 @@ app.post('/Instrutores', async (req, res) => {
 
 app.put('/Instrutores/:id', async (req, res) => {
     try {
-        const {nome, codigo, hora_de_entrada, hora_de_saida, total_de_alunos_passados} = req.body
-        const [resultado] = await pool.query('UPDATE Instrutores SET nome = ?, codigo = ?, hora_de_entrada = ?, hora_de_saida = ?, total_de_alunos_passados = ? WHERE id = ?', [nome, codigo, hora_de_entrada, hora_de_saida, total_de_alunos_passados, req.params.id])
+        const {idade, endereco, especialidade} = req.body
+        const [resultado] = await pool.query('UPDATE Instrutores SET idade = ?, endereco= ?, especialidade = ?, WHERE id = ?', [total_de_alunos_passados, req.params.id])
 
         if (resultado.affectedRows === 0) {
            return res.status(404).json({ message: 'Instrutor nao encontrado, vai ver deu uma de diogo'})
