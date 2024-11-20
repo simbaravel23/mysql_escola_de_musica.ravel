@@ -18,9 +18,9 @@ app.use(express.json())
 
 
 //rota pra instrumentos
-app.get('/instrumentos', async (req, res) => {
+app.get('/instrumentos2', async (req, res) => {
     try {
-        const [rows] = await pool.query('SELECT * FROM instrumentos')
+        const [rows] = await pool.query('SELECT * FROM instrumentos2')
         res.json(rows)
     } catch (error) {
         console.error('Erro ao buscar os dados, deu nao man, deu um treco aq:', error)
@@ -28,10 +28,10 @@ app.get('/instrumentos', async (req, res) => {
     }
 })
 
-app.post('/instrumentos', async (req, res) => {
+app.post('/instrumentos2', async (req, res) => {
     try {
         const {tipo, modelo, marca} = req.body
-        const [resultado] =await pool.query('INSERT INTO instrumentos (tipo, modelo, marca) values (?, ?, ?)', [tipo, modelo, marca])
+        const [resultado] =await pool.query('INSERT INTO instrumentos2 (tipo, modelo, marca) values (?, ?, ?)', [tipo, modelo, marca])
         res.status(201).json({ message: 'Instrumento registrado com sucesso anjoo, e nois tmj', id: resultado.insertId})
     } catch  (error) {
         console.error('Erro ao registrar o instrumento anjo, q guerra 🙁', error)
@@ -40,10 +40,10 @@ app.post('/instrumentos', async (req, res) => {
 })
 
 
-app.put('/instrumentos/:id', async (req, res) => {
+app.put('/instrumentos2/:id', async (req, res) => {
     try {
         const {tipo, modelo, marca} = req.body
-        const [resultado] = await pool.query('UPDATE instrumentos SET tipo = ?, modelo = ?, marca = ? WHERE id = ?', [tipo, modelo, marca, req.params.id])
+        const [resultado] = await pool.query('UPDATE instrumentos2 SET tipo = ?, modelo = ?, marca = ? WHERE id = ?', [tipo, modelo, marca, req.params.id])
         
         if (resultado.affectedRows === 0 ) {
             return res.status(404).json({ message: 'Instrumento nao encontrado, o encarregado brecou'})
@@ -56,9 +56,9 @@ app.put('/instrumentos/:id', async (req, res) => {
 })
 
 
-app.delete('/instrumentos/:id', async (req, res) => {
+app.delete('/instrumentos2/:id', async (req, res) => {
     try {
-        const [resultado] = await pool.query('DELETE FROM instrumentos WHERE id = ?', [req.params.id])
+        const [resultado] = await pool.query('DELETE FROM instrumentos2 WHERE id = ?', [req.params.id])
         if ( resultado.affectedRows === 0 ) {
             return res.status(404).json({ message: 'Instrumento nao encontrado, o encarregado brecou'})
         } 
@@ -71,9 +71,9 @@ app.delete('/instrumentos/:id', async (req, res) => {
 
 //ROTAS ALUNOS
 
-app.get('/alunos', async (req, res) => {
+app.get('/alunos2', async (req, res) => {
     try {
-        const [rows] = await pool.query('SELECT * FROM alunos')
+        const [rows] = await pool.query('SELECT * FROM alunos2')
         res.json(rows)
     } catch (error) {
         console.error('Erro ao buscar o aluno, se ta perdendo a criançada em:', error)
@@ -81,10 +81,10 @@ app.get('/alunos', async (req, res) => {
     }
 })
 
-app.post('/alunos', async (req, res) => {
+app.post('/alunos2', async (req, res) => {
     try {
         const {idade, endereco} = req.body 
-        const [resultado] = await pool.query('INSERT INTO alunos (idade, endereco) VALUES (?, ?) ', [idade, endereco])
+        const [resultado] = await pool.query('INSERT INTO alunos2 (idade, endereco) VALUES (?, ?) ', [idade, endereco])
         res.status(201).json({message: 'Aluno registrado, novo aluno familiaaaaa😁😁', id: resultado.insertId})
     } catch (error) {
         console.error('Erro ao registrar o aluno, que guerra em:', error)
@@ -92,10 +92,10 @@ app.post('/alunos', async (req, res) => {
     }
 })
 
-app.put('/alunos/:id', async (req, res) => {
+app.put('/alunos2/:id', async (req, res) => {
     try {
         const {idade, endereco} = req.body
-        const [resultado] = await pool.query('UPDATE alunos SET idade = ?, endereco = ? WHERE id = ?', [idade, endereco, req.params.id])
+        const [resultado] = await pool.query('UPDATE alunos2 SET idade = ?, endereco = ? WHERE id = ?', [idade, endereco, req.params.id])
 
         if (resultado.affectedRows === 0) {
            return res.status(404).json({ message: 'Aluno nao encontrado, vai procurar rapaz!!'})
@@ -107,9 +107,9 @@ app.put('/alunos/:id', async (req, res) => {
     }
 })
 
-app.delete('/alunos/:id', async (req, res) => {
+app.delete('/alunos2/:id', async (req, res) => {
     try {
-        const [resultado] = await pool.query('DELETE FROM alunos WHERE id = ?', [req.params.id])
+        const [resultado] = await pool.query('DELETE FROM alunos2 WHERE id = ?', [req.params.id])
         if ( resultado.affectedRows === 0 ) {
             return res.status(404).json({ message: 'Aluno nao encontrado, vai ver ja foi pra goma '})
         } 
@@ -122,9 +122,9 @@ app.delete('/alunos/:id', async (req, res) => {
 
 //ROTA FREQUENCIA
 
-app.get('/frequencia', async (req, res) => {
+app.get('/frequencia2', async (req, res) => {
     try {
-        const [rows] = await pool.query('SELECT * FROM frequencia')
+        const [rows] = await pool.query('SELECT * FROM frequencia2')
         res.json(rows)
     } catch (error) {
         console.error('Erro ao buscar a frequencia, olk ta tao ruim assim🙁:', error)
@@ -132,10 +132,10 @@ app.get('/frequencia', async (req, res) => {
     }
 })
 
-app.post('/frequencia', async (req, res) => {
+app.post('/frequencia2', async (req, res) => {
     try {
         const {data, instrumentos,alunos, instrutores } = req.body 
-        const [resultado] = await pool.query('INSERT INTO frequencia (data, instrumentos,alunos, instrutores) VALUES (?, ?, ?, ?) ', [data, instrumentos,alunos, instrutores])
+        const [resultado] = await pool.query('INSERT INTO frequencia2 (data, instrumentos,alunos, instrutores) VALUES (?, ?, ?, ?) ', [data, instrumentos,alunos, instrutores])
         res.status(201).json({message: 'Frequencia registrada, eai ta bom ou ruim', id: resultado.insertId})
     } catch (error) {
         console.error('Erro ao registrar a frequencia, que guerra em:', error)
@@ -143,10 +143,10 @@ app.post('/frequencia', async (req, res) => {
     }
 })
 
-app.put('/frequencia/:id', async (req, res) => {
+app.put('/frequencia2/:id', async (req, res) => {
     try {
         const {data, instrumentos,alunos, instrutores} = req.body
-        const [resultado] = await pool.query('UPDATE frequencia SET data = ?, instrumentos  = ?, alunos = ?, instrutores = ?WHERE id = ?', [data, instrumentos,alunos, instrutores, req.params.id])
+        const [resultado] = await pool.query('UPDATE frequencia2 SET data = ?, instrumentos  = ?, alunos = ?, instrutores = ?WHERE id = ?', [data, instrumentos,alunos, instrutores, req.params.id])
 
         if (resultado.affectedRows === 0) {
            return res.status(404).json({ message: 'Frequencia nao encontrada, ta ruim em fih'})
@@ -158,9 +158,9 @@ app.put('/frequencia/:id', async (req, res) => {
     }
 })
 
-app.delete('/frequencia/:id', async (req, res) => {
+app.delete('/frequencia2/:id', async (req, res) => {
     try {
-        const [resultado] = await pool.query('DELETE FROM frequencia WHERE id = ?', [req.params.id])
+        const [resultado] = await pool.query('DELETE FROM frequencia2 WHERE id = ?', [req.params.id])
         if ( resultado.affectedRows === 0 ) {
             return res.status(404).json({ message: 'frequencia nao encontrada, vai ver ja foi de f'})
         } 
@@ -173,9 +173,9 @@ app.delete('/frequencia/:id', async (req, res) => {
 
 //ROTA DE INSTRUTORES
 
-app.get('/Instrutores', async (req, res) => {
+app.get('/Instrutores2', async (req, res) => {
     try {
-        const [rows] = await pool.query('SELECT * FROM Instrutores')
+        const [rows] = await pool.query('SELECT * FROM Instrutores2')
         res.json(rows)
     } catch (error) {
         console.error('Erro ao buscar o instrutor, faltou dnovo, parece o diogo moço')
@@ -183,10 +183,10 @@ app.get('/Instrutores', async (req, res) => {
     }
 })
 
-app.post('/Instrutores', async (req, res) => {
+app.post('/Instrutores2', async (req, res) => {
     try {
         const {idade, endereco, especialidade } = req.body 
-        const [resultado] = await pool.query('INSERT INTO Instrutores (idade, endereco, especialidade) VALUES (?, ?, ?) ', [idade, endereco, especialidade])
+        const [resultado] = await pool.query('INSERT INTO Instrutores2 (idade, endereco, especialidade) VALUES (?, ?, ?) ', [idade, endereco, especialidade])
         res.status(201).json({message: 'Instrutor registrado com sucesso, mais um homi pra trabaia', id: resultado.insertId})
     } catch (error) {
         console.error('Erro ao registrar o instrutor , que guerra em:', error)
@@ -194,10 +194,10 @@ app.post('/Instrutores', async (req, res) => {
     }
 })
 
-app.put('/Instrutores/:id', async (req, res) => {
+app.put('/Instrutores2/:id', async (req, res) => {
     try {
         const {idade, endereco, especialidade} = req.body
-        const [resultado] = await pool.query('UPDATE Instrutores SET idade = ?, endereco= ?, especialidade = ?, WHERE id = ?', [total_de_alunos_passados, req.params.id])
+        const [resultado] = await pool.query('UPDATE Instrutores2 SET idade = ?, endereco= ?, especialidade = ?, WHERE id = ?', [total_de_alunos_passados, req.params.id])
 
         if (resultado.affectedRows === 0) {
            return res.status(404).json({ message: 'Instrutor nao encontrado, vai ver deu uma de diogo'})
@@ -209,9 +209,9 @@ app.put('/Instrutores/:id', async (req, res) => {
     }
 })
 
-app.delete('/Instrutores/:id', async (req, res) => {
+app.delete('/Instrutores2/:id', async (req, res) => {
     try {
-        const [resultado] = await pool.query('DELETE FROM Instrutores WHERE id = ?', [req.params.id])
+        const [resultado] = await pool.query('DELETE FROM Instrutores2 WHERE id = ?', [req.params.id])
         if ( resultado.affectedRows === 0 ) {
             return res.status(404).json({ message: 'instrutor nao encontrada, vai ver ja foi de f'})
         } 
